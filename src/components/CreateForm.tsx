@@ -67,7 +67,7 @@ const CreateForm: React.FC<CreateProps> = ({ onClose }) => {
     try {
       // Vérification de l'existence de l'utilisateur
       const checkResponse = await fetch(
-        `http://localhost:1234/api/user/check/${email}`
+        `https://todolist-back-production-8512.up.railway.app/api/user/check/${email}`
       );
       if (checkResponse.ok) {
         const checkData = await checkResponse.json();
@@ -79,7 +79,7 @@ const CreateForm: React.FC<CreateProps> = ({ onClose }) => {
 
       // Création du compte
       const createResponse = await fetch(
-        "http://localhost:1234/api/user/signup",
+        "https://todolist-back-production-8512.up.railway.app/api/user/signup",
         {
           method: "POST",
           headers: {

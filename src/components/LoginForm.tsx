@@ -34,13 +34,16 @@ const LoginForm: React.FC<LoginProps> = ({ onClose }) => {
     const data = { email, password };
 
     try {
-      const response = await fetch("http://localhost:1234/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://todolist-back-production-8512.up.railway.app/api/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();

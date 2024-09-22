@@ -33,7 +33,7 @@ const Accueil: React.FC = () => {
       const token = localStorage.getItem("authToken");
       const formattedDate = date.toISOString().split("T")[0]; // Format YYYY-MM-DD
       const response = await fetch(
-        `http://localhost:1234/api/card/${formattedDate}`,
+        `https://todolist-back-production-8512.up.railway.app/api/card/${formattedDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -56,12 +56,15 @@ const Accueil: React.FC = () => {
   const fetchCategories = async () => {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://localhost:1234/api/categories", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://todolist-back-production-8512.up.railway.app/api/categories",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         setCategories(data);
@@ -83,15 +86,18 @@ const Accueil: React.FC = () => {
         throw new Error("No authentication token found");
       }
 
-      const response = await fetch("http://localhost:1234/api/categories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name: newCategoryName }),
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://todolist-back-production-8512.up.railway.app/api/categories",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name: newCategoryName }),
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -116,21 +122,24 @@ const Accueil: React.FC = () => {
   ) => {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://localhost:1234/api/card", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          date,
-          category,
-          priority,
-          isCompleted: false,
-        }),
-      });
+      const response = await fetch(
+        "https://todolist-back-production-8512.up.railway.app/api/card",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title,
+            description,
+            date,
+            category,
+            priority,
+            isCompleted: false,
+          }),
+        }
+      );
 
       if (response.ok) {
         const newCard = await response.json();
@@ -148,7 +157,7 @@ const Accueil: React.FC = () => {
     try {
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        `http://localhost:1234/api/categories/${categoryId}`,
+        `https://todolist-back-production-8512.up.railway.app/api/categories/${categoryId}`,
         {
           method: "DELETE",
           headers: {
@@ -172,12 +181,15 @@ const Accueil: React.FC = () => {
   const handleDeleteTask = async (taskId: string) => {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://localhost:1234/api/card/${taskId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://todolist-back-production-8512.up.railway.app/api/card/${taskId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         setTasks(tasks.filter((task) => task._id !== taskId));
@@ -203,7 +215,7 @@ const Accueil: React.FC = () => {
 
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        `http://localhost:1234/api/card/${taskId}/complete`,
+        `https://todolist-back-production-8512.up.railway.app/api/card/${taskId}/complete`,
         {
           method: "PATCH",
           headers: {
@@ -274,14 +286,23 @@ const Accueil: React.FC = () => {
   ) => {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://localhost:1234/api/card/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ title, description, date, category, priority }),
-      });
+      const response = await fetch(
+        `https://todolist-back-production-8512.up.railway.app/api/card/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title,
+            description,
+            date,
+            category,
+            priority,
+          }),
+        }
+      );
 
       if (response.ok) {
         const updatedCard = await response.json();

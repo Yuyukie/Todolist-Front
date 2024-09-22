@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { FaTrash } from "react-icons/fa";
 
 interface Task {
@@ -107,7 +107,7 @@ const CreateTask: React.FC<CreateTaskProps> = ({
     };
   }, [isAddingCategory]);
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     if (!title.trim()) {
       return "Veuillez entrer un titre pour la tâche";
     }
@@ -127,11 +127,11 @@ const CreateTask: React.FC<CreateTaskProps> = ({
       return "Veuillez sélectionner un jour";
     }
     return null;
-  };
+  }, [title, description, category, priority, selectedDate]);
 
   useEffect(() => {
     setError(validateForm());
-  }, [title, description, category, priority, selectedDate]);
+  }, [title, description, category, priority, selectedDate, validateForm]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
