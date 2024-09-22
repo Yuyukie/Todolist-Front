@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Supprimez ou commentez tout style global qui pourrait affecter le fond */
