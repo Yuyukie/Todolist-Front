@@ -5,7 +5,7 @@ import Calendar from "../../components/Calendar";
 import Modal from "../../components/Modal";
 import CreateTask from "../../components/CreateTask";
 import { FaPencilAlt } from "react-icons/fa";
-import Footer from "@/components/Footer";
+import Footer from "../../components/Footer";
 
 interface Category {
   _id: string;
